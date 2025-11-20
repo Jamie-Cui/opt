@@ -13,3 +13,6 @@
 [submodule "dotfiles"]
 	path = dotfiles
 	url = git@github.com:Jamie-Cui/dotfiles.git
+[submodule "emacs"]
+	path = emacs
+	url = https://github.com/emacs-mirror/emacs.git
