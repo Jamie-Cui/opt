@@ -1,0 +1,46 @@
+# Git repositories to clone
+# Format: full git URL (https:// or git@) and target directory
+# Extracted from .gitmodules
+#
+# Optional fields:
+#   depth = 1           # Shallow clone with specified depth (e.g., 1 for latest commit only)
+#   branch = "main"     # Clone specific branch
+#   tag = "v1.0.0"      # Checkout specific tag after clone
+#   commit = "abc123"   # Pin to specific commit hash (applied after clone)
+
+[repo.wondershaper]
+url = "https://github.com/magnific0/wondershaper.git"
+dir = "wondershaper"
+depth = 1
+
+[repo.libboundscheck]
+url = "https://github.com/openeuler-mirror/libboundscheck.git"
+dir = "libboundscheck"
+depth = 1
+
+# [repo.microprofile]
+# url = "https://github.com/jonasmr/microprofile.git"
+# dir = "microprofile"
+# depth = 1
+
+[repo.emacs]
+url = "https://github.com/emacs-mirror/emacs.git"
+dir = "emacs"
+depth = 1
+
+[repo.ctags]
+url = "https://github.com/universal-ctags/ctags.git"
+dir = "ctags"
+depth = 1
+
+[repo.dotfiles]
+url = "git@github.com:Jamie-Cui/dotfiles.git"
+dir = "dotfiles"
+
+[repo.emacs_d]
+url = "git@github.com:Jamie-Cui/emacs.d.git"
+dir = "emacs.d"
+
+[repo.org_root]
+url = "git@github.com:Jamie-Cui/org-root.git"
+dir = "org-root"

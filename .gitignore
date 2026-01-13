@@ -1,5 +1,7 @@
 # Compiled
 *.elc
+.agent-shell
+.claude
 
 # Packaging
 .cask/
@@ -15,3 +17,10 @@ dist/
 
 # Undo-tree save-files
 *.~undo-tree
+wondershaper
+libboundscheck
+emacs
+ctags
+dotfiles
+emacs.d
+org-root
