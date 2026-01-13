@@ -26,6 +26,7 @@ depth = 1
 [repo.emacs]
 url = "https://github.com/emacs-mirror/emacs.git"
 dir = "emacs"
+tag = "emacs-30.2"
 depth = 1
 
 [repo.ctags]
