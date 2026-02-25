@@ -34,10 +34,6 @@ url = "https://github.com/universal-ctags/ctags.git"
 dir = "ctags"
 depth = 1
 
-[repo.dotfiles]
-url = "git@github.com:Jamie-Cui/dotfiles.git"
-dir = "dotfiles"
-
 [repo.emacs_d]
 url = "git@github.com:Jamie-Cui/emacs.d.git"
 dir = "emacs.d"
