@@ -57,16 +57,17 @@ commit = "abc123"   # Pin to specific commit hash
 ### Development Tools
 - **wondershaper** - Network traffic shaping tool
 - **ctags** - Universal ctags for source code indexing
-- **microprofile** - Real-time CPU/GPU profiler
+- **emacs** - Emacs source (for custom builds, pinned to v30.2)
 
 ### Libraries
 - **libboundscheck** - C bounds checking library
 
 ### Configuration
-- **dotfiles** - Personal shell, editor, and system configs
 - **emacs.d** - Emacs configuration
-- **emacs** - Emacs source (for custom builds)
 - **org-root** - Org-mode configuration
+
+### Included Directly
+- **dotfiles/** - Personal shell, editor, and system configs (i3, kitty, vim, sketchybar, etc.) — tracked in this repo, not via `repo.toml`
 
 ## Adding New Repositories
 
