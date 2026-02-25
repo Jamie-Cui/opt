@@ -8,26 +8,20 @@ Personal development monorepo that aggregates external tools/libraries via decla
 
 ## Commands
 
-### Root level — manage external repositories
+### Root level — manage everything
 
 ```bash
-make repos    # Clone all repositories defined in repo.toml
-make clean    # Remove all cloned repositories
-make help     # Show available targets
+make repo                 # Clone all repositories defined in config.toml
+make repo-clean           # Remove all cloned repositories
+make font                 # Replace {dotfont} placeholders in dotfiles with font_size from config.toml
+make font FONT_SIZE=12    # One-off override of font size
+make font-clean           # Revert font sizes back to {dotfont} placeholders
+make help                 # Show available targets
 ```
 
-### dotfiles/ — deploy system configurations
+To change the font size permanently, edit `[dotfiles] font_size` in `config.toml`.
 
-```bash
-cd dotfiles
-./configure                    # Generate Makefile (default font-size=10)
-./configure --font-size=12     # Custom font size
-make deploy                    # Replace {dotfont} placeholders with configured font size
-make clean                     # Revert font sizes back to {dotfont} placeholders
-make install                   # Deploy and install dotfiles
-```
-
-### emacs.d/ — Emacs configuration (cloned via `make repos`)
+### emacs.d/ — Emacs configuration (cloned via `make repo`)
 
 ```bash
 cd emacs.d
@@ -40,13 +34,20 @@ make clean      # Remove .elc, .eln, .tar.gz files
 
 ## Architecture
 
-### Repository management (`Makefile` + `repo.toml`)
+### Configuration (`config.toml`)
 
-The root Makefile parses `repo.toml` to clone external git repositories. Each `[repo.name]` section declares `url`, `dir`, and optional `branch`, `tag`, `depth`, `commit` fields. The Makefile generates a temporary shell script at runtime that processes each entry, supporting shallow clones and commit pinning. Cloned directories are auto-appended to `.gitignore`.
+Single TOML file for all project configuration:
 
-### Dotfiles configure system (`dotfiles/`)
+- `[dotfiles]` — dotfiles settings (`font_size`)
+- `[repo.*]` — external git repositories to clone; each entry declares `url`, `dir`, and optional `branch`, `tag`, `depth`, `commit`
 
-Uses an autoconf-style pattern: `configure` generates `Makefile` from `Makefile.in` by substituting `@FONT_SIZE@` and `@PREFIX@` placeholders. The `{dotfont}` token in config files (`.conf`, `.ini`, `.yaml`, `config`) gets replaced with the configured font size on `make deploy` and reverted on `make clean` for clean version control.
+### Repository management (`Makefile` + `config.toml`)
+
+The root Makefile parses `config.toml` to clone external git repositories. The Makefile generates a temporary shell script at runtime that processes each `[repo.*]` entry, supporting shallow clones and commit pinning. Cloned directories are auto-appended to `.gitignore`.
+
+### Dotfiles font system (`dotfiles/`)
+
+The root Makefile reads `font_size` from `config.toml [dotfiles]` at parse time. The `{dotfont}` token in config files (`.conf`, `.ini`, `.yaml`, `config`) gets replaced with the configured font size on `make font` and reverted on `make font-clean` for clean version control.
 
 ### Dotfiles contents
 

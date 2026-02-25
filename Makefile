@@ -1,16 +1,27 @@
-.PHONY: help repos clean
+.PHONY: help repo repo-clean font font-clean
+
+# Read FONT_SIZE from config.toml [dotfiles] section; default to 10 if absent.
+# Override on the command line: make font FONT_SIZE=12
+FONT_SIZE ?= $(shell awk -F'=' '/^\[dotfiles\]/{s=1} s && /^font_size/{sub(/#.*/, "", $$2); gsub(/[[:space:]]/, "", $$2); print $$2; exit}' config.toml)
+FONT_SIZE ?= 10
+
+# ── Help ─────────────────────────────────────────────────────────────────────
 
 help: ## Show this help message
 	@echo "Available targets:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+	@echo ""
+	@echo "Dotfiles font size: $(FONT_SIZE)  (edit [dotfiles] font_size in config.toml to change)"
 
-repos: ## Clone all repositories defined in repo.toml
+# ── Repository management ─────────────────────────────────────────────────────
+
+repo: ## Clone all repositories defined in config.toml
 	@$(MAKE) --no-print-directory -f $(firstword $(MAKEFILE_LIST)) _update_gitignore
 	@$(MAKE) --no-print-directory -f $(firstword $(MAKEFILE_LIST)) _clone_repos
 
 _update_gitignore:
 	@{ \
-	awk -F'"' '/^dir/ {print $$2}' repo.toml | while read dir; do \
+	awk -F'"' '/^dir/ {print $$2}' config.toml | while read dir; do \
 		if [ -n "$$dir" ]; then \
 			grep -qx "$$dir" .gitignore 2>/dev/null || echo "$$dir"; \
 		fi \
@@ -57,7 +68,7 @@ _clone_repos:
 	echo '    "tag ="*) tag=$$(echo "$$line" | sed "s/tag = \"//; s/\"$$//");;'; \
 	echo '    "commit ="*) commit=$$(echo "$$line" | sed "s/commit = \"//; s/\"$$//");;'; \
 	echo '  esac'; \
-	echo 'done < repo.toml'; \
+	echo 'done < config.toml'; \
 	echo 'if [ -n "$$url" ] && [ -n "$$dir" ]; then'; \
 	echo '  cloned=false'; \
 	echo '  if [ -d "$$dir/.git" ]; then'; \
@@ -85,6 +96,20 @@ _clone_repos:
 	sh "$$_temp_script"; \
 	rm "$$_temp_script"
 
-clean: ## Remove all cloned repositories
-	@awk -F'"' '/^dir/ {dir=$$2; system("rm -rf " dir)}' repo.toml
+repo-clean: ## Remove all cloned repositories
+	@awk -F'"' '/^dir/ {dir=$$2; system("rm -rf " dir)}' config.toml
 	@echo "Cleaned all vendor directories"
+
+# ── Dotfiles ──────────────────────────────────────────────────────────────────
+
+font: ## Replace {dotfont} placeholders in dotfiles with FONT_SIZE from config.toml
+	@find dotfiles -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.yaml" -o -name "config" \) \
+		-not -path "dotfiles/.git/*" \
+		-exec sed -i 's/{dotfont}/$(FONT_SIZE)/g' {} \;
+	@echo "Deployed: replaced {dotfont} with $(FONT_SIZE)"
+
+font-clean: ## Revert FONT_SIZE back to {dotfont} placeholders in dotfiles
+	@find dotfiles -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.yaml" -o -name "config" \) \
+		-not -path "dotfiles/.git/*" \
+		-exec sed -i 's/$(FONT_SIZE)/{dotfont}/g' {} \;
+	@echo "Cleaned: reverted $(FONT_SIZE) to {dotfont}"

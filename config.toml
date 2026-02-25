@@ -1,6 +1,10 @@
+# Project configuration
+
+[dotfiles]
+font_size = 10   # Font size used in dotfiles; replaces {dotfont} placeholders on 'make font'
+
 # Git repositories to clone
 # Format: full git URL (https:// or git@) and target directory
-# Extracted from .gitmodules
 #
 # Optional fields:
 #   depth = 1           # Shallow clone with specified depth (e.g., 1 for latest commit only)
