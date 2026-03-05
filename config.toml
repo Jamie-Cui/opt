@@ -22,11 +22,6 @@ url = "https://github.com/openeuler-mirror/libboundscheck.git"
 dir = "libboundscheck"
 depth = 1
 
-[repo.trend-radar]
-url = "git@github.com:Jamie-Cui/trend-radar.git"
-dir = "trend-radar"
-depth = 1
-
 # [repo.microprofile]
 # url = "https://github.com/jonasmr/microprofile.git"
 # dir = "microprofile"
@@ -50,3 +45,7 @@ dir = "emacs.d"
 [repo.org_root]
 url = "git@github.com:Jamie-Cui/org-root.git"
 dir = "org-root"
+
+[repo.trend-radar]
+url = "git@github.com:Jamie-Cui/trend-radar.git"
+dir = "trend-radar"
