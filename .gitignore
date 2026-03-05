@@ -26,3 +26,5 @@ emacs
 ctags
 emacs.d
 org-root
+trend-radar
+*.bak
