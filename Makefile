@@ -2,7 +2,7 @@
 
 # Read FONT_SIZE from config.toml [dotfiles] section; default to 10 if absent.
 # Override on the command line: make font FONT_SIZE=12
-FONT_SIZE ?= $(shell awk -F'=' '/^\[dotfiles\]/{s=1} s && /^font_size/{sub(/#.*/, "", $$2); gsub(/[[:space:]]/, "", $$2); print $$2; exit}' config.toml)
+FONT_SIZE ?= $(shell awk -F'=' '/^\[dotfiles\]/{s=1} s && /^font_size/{match($$2, /[0-9]+/); print substr($$2, RSTART, RLENGTH); exit}' config.toml)
 FONT_SIZE ?= 10
 
 # ── Help ─────────────────────────────────────────────────────────────────────
@@ -105,7 +105,7 @@ repo-clean: ## Remove all cloned repositories
 font: ## Replace {dotfont} placeholders in dotfiles with FONT_SIZE from config.toml
 	@find dotfiles -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.yaml" -o -name "config" \) \
 		-not -path "dotfiles/.git/*" \
-		-exec sh -c 'for f; do cp "$$f" "$$f.opt.bak" && sed -i "s/{dotfont}/$(FONT_SIZE)/g" "$$f"; done' _ {} \;
+		-exec sh -c 'for f; do cp "$$f" "$$f.opt.bak" && sed -i "" "s/{dotfont}/$(FONT_SIZE)/g" "$$f"; done' _ {} \;
 	@echo "Deployed: replaced {dotfont} with $(FONT_SIZE)"
 
 font-clean: ## Restore dotfiles from .opt.bak backups
