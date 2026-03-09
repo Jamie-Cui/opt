@@ -51,7 +51,7 @@
   },
 
   "clock": {
-    "timezone": "Asia/Kolkata",
+    "timezone": "Asia/Shanghai",
     "tooltip": false,
     "format": "{:%H:%M:%S  -  %A, %d}",
     "interval": 1
