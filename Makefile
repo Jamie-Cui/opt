@@ -105,7 +105,7 @@ repo-clean: ## Remove all cloned repositories
 font: ## Replace {dotfont} placeholders in dotfiles with FONT_SIZE from config.toml
 	@find dotfiles -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.yaml" -o -name "config" \) \
 		-not -path "dotfiles/.git/*" \
-		-exec sh -c 'for f; do cp "$$f" "$$f.opt.bak" && sed -i "" "s/{dotfont}/$(FONT_SIZE)/g" "$$f"; done' _ {} \;
+		-exec sh -c 'for f; do cp "$$f" "$$f.opt.bak" && sed "s/{dotfont}/$(FONT_SIZE)/g" "$$f.opt.bak" > "$$f"; done' _ {} \;
 	@echo "Deployed: replaced {dotfont} with $(FONT_SIZE)"
 
 font-clean: ## Restore dotfiles from .opt.bak backups
