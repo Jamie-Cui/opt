@@ -2,6 +2,7 @@
 
 # Read FONT_SIZE from config.toml [dotfiles] section; default to 10 if absent.
 # Override on the command line: make font FONT_SIZE=12
+# Templates use @FONT_SIZE@ placeholder (autoconf convention)
 FONT_SIZE ?= $(shell awk -F'=' '/^\[dotfiles\]/{s=1} s && /^font_size/{match($$2, /[0-9]+/); print substr($$2, RSTART, RLENGTH); exit}' config.toml)
 FONT_SIZE ?= 10
 
@@ -102,13 +103,12 @@ repo-clean: ## Remove all cloned repositories
 
 # ── Dotfiles ──────────────────────────────────────────────────────────────────
 
-font: ## Replace {dotfont} placeholders in dotfiles with FONT_SIZE from config.toml
-	@find dotfiles -type f \( -name "*.conf" -o -name "*.ini" -o -name "*.yaml" -o -name "config" \) \
-		-not -path "dotfiles/.git/*" \
-		-exec sh -c 'for f; do cp "$$f" "$$f.opt.bak" && sed "s/{dotfont}/$(FONT_SIZE)/g" "$$f.opt.bak" > "$$f"; done' _ {} \;
-	@echo "Deployed: replaced {dotfont} with $(FONT_SIZE)"
+font: ## Generate dotfiles from .in templates with FONT_SIZE from config.toml
+	@find dotfiles -type f -name "*.in" -not -path "dotfiles/.git/*" \
+		-exec sh -c 'for f; do out=$${f%.in}; sed "s/@FONT_SIZE@/$(FONT_SIZE)/g" "$$f" > "$$out"; done' _ {} \;
+	@echo "Generated dotfiles with font_size=$(FONT_SIZE)"
 
-font-clean: ## Restore dotfiles from .opt.bak backups
-	@find dotfiles -type f -name "*.opt.bak" \
-		-exec sh -c 'for f; do mv "$$f" "$${f%.opt.bak}"; done' _ {} \;
-	@echo "Cleaned: restored from .opt.bak backups"
+font-clean: ## Remove generated dotfiles (restore to template-only state)
+	@find dotfiles -type f -name "*.in" -not -path "dotfiles/.git/*" \
+		-exec sh -c 'for f; do out=$${f%.in}; rm -f "$$out"; done' _ {} \;
+	@echo "Cleaned generated dotfiles"

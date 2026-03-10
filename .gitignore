@@ -27,4 +27,9 @@ ctags
 emacs.d
 org-root
 trend-radar
-*.bak
+# Generated dotfiles (from .in templates via 'make font')
+dotfiles/kitty/kitty.conf
+dotfiles/gtk-3.0/settings.ini
+dotfiles/gtk-4.0/settings.ini
+dotfiles/i3/config
+dotfiles/hypr/hyprland.conf

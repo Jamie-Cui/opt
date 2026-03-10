@@ -10,8 +10,8 @@ gtk-4.0/*
 
 # but except this pattern
 !rime/*.custom.yaml
-!gtk-3.0/settings.ini
-!gtk-4.0/settings.ini
+!gtk-3.0/settings.ini.in
+!gtk-4.0/settings.ini.in
 
 # others
 .DS_Store

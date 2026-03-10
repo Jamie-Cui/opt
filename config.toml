@@ -1,7 +1,7 @@
 # Project configuration
 
 [dotfiles]
-font_size = 10   # Font size used in dotfiles; replaces {dotfont} placeholders on 'make font'
+font_size = 10   # Font size used in dotfiles; replaces @FONT_SIZE@ in .in templates on 'make font'
 
 # Git repositories to clone
 # Format: full git URL (https:// or git@) and target directory

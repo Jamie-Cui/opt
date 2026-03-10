@@ -16,15 +16,12 @@ make clean    # Remove all cloned repositories
 make help     # Show available targets
 ```
 
-### dotfiles/ — deploy system configurations
+### dotfiles/ — font templating
 
 ```bash
-cd dotfiles
-./configure                    # Generate Makefile (default font-size=10)
-./configure --font-size=12     # Custom font size
-make deploy                    # Replace {dotfont} placeholders with configured font size
-make clean                     # Revert font sizes back to {dotfont} placeholders
-make install                   # Deploy and install dotfiles
+make font                  # Generate dotfiles from .in templates (default font_size=10)
+make font FONT_SIZE=12     # Generate with custom font size
+make font-clean            # Remove generated dotfiles (restore to template-only state)
 ```
 
 ### emacs.d/ — Emacs configuration (cloned via `make repos`)
@@ -46,7 +43,7 @@ The root Makefile parses `repo.toml` to clone external git repositories. Each `[
 
 ### Dotfiles configure system (`dotfiles/`)
 
-Uses an autoconf-style pattern: `configure` generates `Makefile` from `Makefile.in` by substituting `@FONT_SIZE@` and `@PREFIX@` placeholders. The `{dotfont}` token in config files (`.conf`, `.ini`, `.yaml`, `config`) gets replaced with the configured font size on `make deploy` and reverted on `make clean` for clean version control.
+Uses an autoconf-style `.in` template pattern: files like `kitty.conf.in` contain `@FONT_SIZE@` placeholders and are tracked in git. Running `make font` generates the actual config files (e.g. `kitty.conf`) by substituting the placeholder with the value from `config.toml`. Generated files are gitignored; `make font-clean` removes them.
 
 ### Dotfiles contents
 
