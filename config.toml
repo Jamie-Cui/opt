@@ -12,15 +12,15 @@ font_size = 10   # Font size used in dotfiles; replaces @FONT_SIZE@ in .in templ
 #   tag = "v1.0.0"      # Checkout specific tag after clone
 #   commit = "abc123"   # Pin to specific commit hash (applied after clone)
 
-[repo.wondershaper]
-url = "https://github.com/magnific0/wondershaper.git"
-dir = "wondershaper"
-depth = 1
+# [repo.wondershaper]
+# url = "https://github.com/magnific0/wondershaper.git"
+# dir = "wondershaper"
+# depth = 1
 
-[repo.libboundscheck]
-url = "https://github.com/openeuler-mirror/libboundscheck.git"
-dir = "libboundscheck"
-depth = 1
+# [repo.libboundscheck]
+# url = "https://github.com/openeuler-mirror/libboundscheck.git"
+# dir = "libboundscheck"
+# depth = 1
 
 # [repo.microprofile]
 # url = "https://github.com/jonasmr/microprofile.git"
@@ -45,7 +45,3 @@ dir = "emacs.d"
 [repo.org_root]
 url = "git@github.com:Jamie-Cui/org-root.git"
 dir = "org-root"
-
-[repo.trend-radar]
-url = "git@github.com:Jamie-Cui/trend-radar.git"
-dir = "trend-radar"
