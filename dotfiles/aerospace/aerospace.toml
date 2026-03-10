@@ -1,12 +1,3 @@
-after-startup-command = ['exec-and-forget sketchybar']
-
-# Notify Sketchybar about workspace change
-exec-on-workspace-change = [
-  '/bin/bash',
-  '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE',
-]
-
 # Start AeroSpace at login
 start-at-login = true
 
@@ -16,15 +7,7 @@ default-root-container-orientation = 'auto'
 # on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = false
 
-# ----------------------------------------------
-# key bindings (windows, linux, and mac)
-# ----------------------------------------------
 [mode.main.binding]
-
-# DEPRECATED See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-# cmd-1 = 'exec-and-forget open -a /Applications/Firefox.app'
-# cmd-2 = 'exec-and-forget open -a /Users/jamie/opt/emacs/nextstep/Emacs.app'
-# cmd-3 = 'exec-and-forget open -a /Applications/kitty.app'
 
 # meta-space default to alfred, no configuration need
 # meta-tab default just works, no configuration need
@@ -46,10 +29,24 @@ alt-shift-l = 'move right'
 cmd-1 = 'workspace 1'
 cmd-2 = 'workspace 2'
 cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
+cmd-5 = 'workspace 5'
+cmd-6 = 'workspace 6'
+cmd-7 = 'workspace 7'
+cmd-8 = 'workspace 8'
+cmd-9 = 'workspace 9'
+cmd-0 = 'workspace 0'
 
 cmd-shift-1 = 'move-node-to-workspace 1'
 cmd-shift-2 = 'move-node-to-workspace 2'
 cmd-shift-3 = 'move-node-to-workspace 3'
+cmd-shift-4 = 'move-node-to-workspace 4'
+cmd-shift-5 = 'move-node-to-workspace 5'
+cmd-shift-6 = 'move-node-to-workspace 6'
+cmd-shift-7 = 'move-node-to-workspace 7'
+cmd-shift-8 = 'move-node-to-workspace 8'
+cmd-shift-9 = 'move-node-to-workspace 9'
+cmd-shift-0 = 'move-node-to-workspace 0'
 
 # FIXME (last review: 2025-08-02) aerospace does not support that
 # alt-shift-enter = floating toggle
@@ -81,7 +78,7 @@ preset = 'qwerty'
 [gaps]
 inner.horizontal = 3
 inner.vertical =   3
-outer.left =       5
+outer.left =       0
 outer.bottom =     0
-outer.top =        30
-outer.right =      5
+outer.top =        0
+outer.right =      0
