@@ -50,8 +50,7 @@ cmd-shift-8 = 'move-node-to-workspace 8'
 cmd-shift-9 = 'move-node-to-workspace 9'
 cmd-shift-0 = 'move-node-to-workspace 0'
 
-# FIXME (last review: 2025-08-02) aerospace does not support that
-# alt-shift-enter = floating toggle
+alt-shift-enter = 'layout floating tiling'
 
 # ----------------------------------------------
 # Special Apps
