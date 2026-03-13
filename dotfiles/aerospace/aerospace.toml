@@ -1,10 +1,11 @@
+config-version = 2
+
 # Start AeroSpace at login
 start-at-login = true
 
 accordion-padding = 0
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
-# on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = false
 
 [mode.main.binding]
@@ -51,10 +52,6 @@ cmd-shift-9 = 'move-node-to-workspace 9'
 cmd-shift-0 = 'move-node-to-workspace 0'
 
 alt-shift-enter = 'layout floating tiling'
-
-# ----------------------------------------------
-# Special Apps
-# ----------------------------------------------
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'wechat'
