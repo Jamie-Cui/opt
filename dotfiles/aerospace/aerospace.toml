@@ -1,3 +1,11 @@
+# call the following commands
+#
+# HACK fix mission control
+# defaults write com.apple.dock expose-group-apps -bool true && killall Dock
+#
+# HACK fix dock (additional turn on autohide in settings)
+# defaults write com.apple.dock pinning -string start && killall Dock
+
 config-version = 2
 
 # Start AeroSpace at login
